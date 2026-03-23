@@ -1,18 +1,19 @@
 import { PenSquareIcon, Trash2Icon } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router'
+import { formatDate } from '../lib/utils'
 
 const NoteCard = ({note}) => {
   return (
     <Link to={"/note/"+note._id}
-    className='card bg-base-100 hover:shadow-lg transition-all duration-200 border-t-4 border-solid border-green-400 rounded-lg'>
-        <div className='card-body border-white rounded-lg border-2 border-solid'>
+    className='card bg-base-100 hover:shadow-lg hover:shadow-gray-500/20 transition-all duration-200 border-t-4 border-solid border-green-400 rounded-lg'>
+        <div className='card-body rounded-lg '>
 
             <h3 className='card-title text-base-content'>{note.title}</h3>
             <p className='text-base-content line-clamp-3'>{note.content}</p>
             <div className='card-actions justify-between items-center mt-4'>
                 <span className='text-sm text-base-content'>
-                    {note.createdAt}
+                    {formatDate(note.createdAt)}
                 </span>
                 <div className='flex items-center gap-1'>
                     <PenSquareIcon className='size-4' />
