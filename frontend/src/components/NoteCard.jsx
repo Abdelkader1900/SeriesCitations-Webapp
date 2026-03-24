@@ -2,8 +2,24 @@ import { PenSquareIcon, Trash2Icon } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router'
 import { formatDate } from '../lib/utils'
+import api from '../lib/axios'
+
+
 
 const NoteCard = ({note}) => {
+
+    const  handleDelete = async (e,id) => {
+        e.preventDefault();
+        if(!window.confirm("Souhaitez-vous supprimer ce contenu ?")){
+            return
+        }
+        try{
+            console.log("/notes/"+note._id+"a été supprimé.");
+            api.delete("/notes/"+note._id);
+        }catch(error){
+            console.log(error)
+        }
+    }
   return (
     <Link to={"/note/"+note._id}
     className='card bg-base-100 hover:shadow-lg hover:shadow-gray-500/20 transition-all duration-200 border-t-4 border-solid border-green-400 rounded-lg'>
@@ -17,7 +33,7 @@ const NoteCard = ({note}) => {
                 </span>
                 <div className='flex items-center gap-1'>
                     <PenSquareIcon className='size-4' />
-                    <button className='btn btn-ghost btn-xs text-error'>
+                    <button className='btn btn-ghost btn-xs text-error' onClick={(e) => handleDelete(e,note._id)}>
                         <Trash2Icon className='size-4'></Trash2Icon>
                     </button>
                 </div>
