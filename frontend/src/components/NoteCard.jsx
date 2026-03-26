@@ -3,21 +3,21 @@ import React from 'react'
 import { Link } from 'react-router'
 import { formatDate } from '../lib/utils'
 import api from '../lib/axios'
+import toast from 'react-hot-toast'
 
+const NoteCard = ({note, onDelete}) => {
 
-
-const NoteCard = ({note}) => {
-
-    const  handleDelete = async (e,id) => {
+    const  handleDelete = async (e) => {
         e.preventDefault();
         if(!window.confirm("Souhaitez-vous supprimer ce contenu ?")){
             return
         }
         try{
-            console.log("/notes/"+note._id+"a été supprimé.");
-            api.delete("/notes/"+note._id);
+            await api.delete("/notes/"+note._id);
+            onDelete(note._id)
         }catch(error){
             console.log(error)
+            toast.error("Echec de la supression")
         }
     }
   return (
