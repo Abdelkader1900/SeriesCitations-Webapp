@@ -35,6 +35,7 @@ function NoteDetailPage() {
   }, [id])
 
   const handleDelete = () => {}
+  const handleSave = () => {}
 
   if(loading){
     return<div className="min-h-screen bg-base-200 flex items-center justify-center">
@@ -84,13 +85,19 @@ function NoteDetailPage() {
                     <span className='label-text'>Quote</span>
                   </label>
                   <textarea
-                    placeholder='Quote'
+                    placeholder='Ecrivez votre citation'
                     className='textarea textarea-bordered h-36 resize-none w-full'
                     value={note.content}
                     onChange={(e)=>setNote({...note, content:e.target.value})}
                     />
                 </div>
               </div>
+            </div>
+
+            <div className="card-actions justify-end">
+              <button className='btn btn-primary' disabled={saving} onClick={handleSave}>
+                Sauvegarder
+              </button>
             </div>
         </div>
       </div>
