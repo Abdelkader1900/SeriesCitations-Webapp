@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import api from '../lib/axios'
 import { LoaderIcon, ArrowLeftIcon, Trash2Icon } from 'lucide-react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import Navbar from '../components/Navbar'
 
 
@@ -14,7 +14,7 @@ function NoteDetailPage() {
   const [loading,setLoading] = useState(true)
   const [saving,setSaving] = useState(false)
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const {id} = useParams()
 
   console.log({id})
@@ -34,8 +34,31 @@ function NoteDetailPage() {
     fetchNotes()
   }, [id])
 
-  const handleDelete = () => {}
-  const handleSave = () => {}
+  const handleDelete = async () => {
+    if (!window.confirm("Voulez vous supprimer la citation ?")) return;
+
+    try{
+      await api.delete("/notes/"+ note._id)
+      navigate("/")
+      toast.success("La citation a été supprimée")
+    }catch(error){
+      console.log(error)
+      toast.error("Impossible de supprimer la citation")
+    }
+
+  }
+  const  handleSave = async () => {
+    if (!window.confirm("Voulez vous modifier la citation ?")) return;
+
+    try{
+      await api.put("/notes/" + note._id, { title: note.title, content: note.content })
+      navigate("/")
+      toast.success("La citation a été modifiée")
+    }catch(error){
+      console.log(error)
+      toast.error("Impossible de modifier la citation")
+    }
+  }
 
   if(loading){
     return<div className="min-h-screen bg-base-200 flex items-center justify-center">
