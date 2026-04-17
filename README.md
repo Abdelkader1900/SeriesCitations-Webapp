@@ -13,7 +13,7 @@ Application de prise de notes full-stack construite avec la stack MERN.
 
 ## Fonctionnalités
 
-- Créer, consulter et supprimer des notes
+- Collecter, consulter et supprimer des citations/notes
 - Page de détail d'une note
 - Notifications toast
 - Interface responsive
