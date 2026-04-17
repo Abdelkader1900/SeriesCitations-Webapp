@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: backend-webapp
+  namespace: dev
+  labels: 
+    app: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: webapp
+  template:
+    metadata:
+      labels: 
+        app: webapp
+    spec:
+      containers: 
+      - name: backend
+        image: mon-image-duback #Je dois build/push 
+        ports:
+        - containerPort: XXXX
+  

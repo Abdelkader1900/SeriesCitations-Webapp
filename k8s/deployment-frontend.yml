@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: frontend-webapp
+  namespace: dev
+  labels: 
+    app: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: webapp
+  template:
+    metadata:
+      labels: 
+        app: webapp
+    spec:
+      containers: 
+      - name: frontend
+        image: mon-image-dufront #Je dois build/push 
+        ports:
+        - containerPort: XXXX
+  
+
